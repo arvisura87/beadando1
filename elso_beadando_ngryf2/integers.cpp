@@ -9,9 +9,9 @@
 //Task: 	adding
 //Input:    integer a
 //Activity: adds the element to the vector if the element is not already in it
-vector<int> Integers::getting()
+vector<int> * Integers::getting()
 {
-    if (p_vector == NULL || p_vector.empty()) throw EMPTY
+    if (p_vector == NULL || p_vector -> empty()) throw EMPTY;
 
     return p_vector;
 
