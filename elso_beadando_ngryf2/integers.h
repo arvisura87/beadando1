@@ -8,19 +8,23 @@
 
 using namespace std;
 
-//Class of diagonal matrices
-//Methods: add, multiply, write, read, refer to an element
-//Representation: only the elements of the diagonal
+//Class of set of integers
+//Methods: representing, isEmpty, adding, removing, checkExistence, evenCount
 class Integers {
 public:
-    enum Exceptions{NOT_AN_INTEGER, ALREADY_EXIST, EMPTY};
+    enum Errors {NOT_AN_INTEGER, ALREADY_EXIST, EMPTY};
 
-    Integers(){ p_vector = NULL; p_biggest = NULL; }
+    Integers(){ p_vector = NULL; evenCounter = 0; }
     ~Integers() { delete[] p_vector; }
 
-    vector<int> getting();
+    void representing();
+    void isEmpty();
+    void adding();
+    void removing();
+    void checkExistence();
+    void evenCount();
 
 private:
-    vector<int> *p_vector;
-    int *p_biggest;
+    vector<int>* p_vector;
+    int evenCounter;
 };

@@ -2,7 +2,6 @@
 //Date:      2020.03.30.
 //Title:     I./6., Set of integers
 
-#include <iostream>
 #include "integers.h"
 
 using namespace std;
@@ -19,11 +18,12 @@ class Menu{
     Integers *p_integers;
 
     void menuWrite();
-    void represent();
+    void representing();
     void isEmpty();
     void adding();
     void removing();
-    void biggest();
+    void checkExistence();
+    void evenCount();
 };
 
 int main()
@@ -40,7 +40,7 @@ void Menu::run()
         menuWrite();
         cout << endl << ">>>>" ; cin >> n;
         switch(n){
-            case 1: represent();
+            case 1: representing();
                     break;
             case 2: isEmpty();
                     break;
@@ -48,7 +48,9 @@ void Menu::run()
                     break;
             case 4: removing();
                     break;
-            case 5: biggest();
+            case 5: checkExistence();
+                    break;
+            case 6: evenCount();
                     break;
         }
     }while(n!=0);
@@ -60,40 +62,42 @@ void Menu::menuWrite()
      cout << " 0. - Quit" << endl;
      cout << " 1. - Represent the Set of Integers" << endl;
      cout << " 2. - Check the Set is empty or not" << endl;
-     cout << " 3. - Add an integer" << endl;
-     cout << " 4. - Remove an integer" << endl;
-     cout << " 5. - Write the biggest element" << endl;
+     cout << " 3. - Add an integer if not already exist in the set" << endl;
+     cout << " 4. - Remove an integer if it is in the set" << endl;
+     cout << " 5. - Check if a given number exist in the set" << endl;
+     cout << " 6. - Get how many even numbers are in the set" << endl;
 }
 
 
-void Menu::represent()
+void Menu::representing()
 {
-    vector<int> ints = p_integers -> getting();
-    cout << "Representing the Set of Integers: " << endl;
-
-    for(int number : ints) {
-        cout << number << '\n';
-    }
+    p_integers -> representing();
 }
 
 void Menu::isEmpty()
 {
-    cout << "Give the diagonal of the first matrix: " << endl;
+    p_integers -> isEmpty();
 }
 
 void Menu::adding()
 {
-    cout << "Give the diagonal of the first matrix: " << endl;
+    p_integers -> adding();
 }
 
 void Menu::removing()
 {
-    cout << "Give the diagonal of the first matrix: " << endl;
+    p_integers -> removing();
 }
 
-void Menu::biggest()
+void Menu::checkExistence()
 {
-    cout << "Give the diagonal of the first matrix: " << endl;
+    p_integers -> checkExistence();
+}
+
+
+void Menu::evenCount()
+{
+    p_integers -> evenCount();
 }
 
 #else
