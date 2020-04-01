@@ -6,19 +6,22 @@
 
 //Task: 	representing
 //Activity: printing the elements of the set
-void Integers::representing()
+string Integers::representing()
 {
+    string result = "";
+
     if (p_vector == NULL || p_vector -> empty())
     {
-        cout << "Error, the set is empty! Please fill it with integers." << endl;
+        result += "Error, the set is empty! Please fill it with integers.\n";
     } else
     {
-        cout << "Representing the Set of Integers: " << endl;
+        result += "Representing the Set of Integers: ";
 
-        for(int number : *p_vector) {
-        cout << number << '\n';
+        for(int num : *p_vector) {
+            result += num + ", ";
         }
     }
+    return result;
 }
 
 //Task: 	representing

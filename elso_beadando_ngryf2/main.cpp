@@ -24,6 +24,7 @@ class Menu{
     void removing();
     void checkExistence();
     void evenCount();
+    int readInput();
 };
 
 int main()
@@ -71,7 +72,8 @@ void Menu::menuWrite()
 
 void Menu::representing()
 {
-    p_integers -> representing();
+    string result = p_integers -> representing();
+    cout << result;
 }
 
 void Menu::isEmpty()
@@ -98,6 +100,18 @@ void Menu::checkExistence()
 void Menu::evenCount()
 {
     p_integers -> evenCount();
+}
+
+int readInput()
+{
+    int input;
+    while (!(cin >> input))
+    {
+        cout << "Please give a valid integer number!" << endl;
+        cin.clear();
+        cin.ignore(123, '\n');
+    }
+    return input;
 }
 
 #else

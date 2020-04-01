@@ -17,7 +17,7 @@ public:
     Integers(){ p_vector = NULL; evenCounter = 0; }
     ~Integers() { delete[] p_vector; }
 
-    void representing();
+    string representing();
     void isEmpty();
     void adding();
     void removing();
