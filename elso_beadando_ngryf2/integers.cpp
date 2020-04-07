@@ -51,10 +51,9 @@ void Integers::add(int number)
         if (!contain)
         {
             p_vector -> push_back(number);
-            if (number % 2 == 0)
-                evenCounter++;
         }
     }
+    if (number % 2 == 0) evenCounter++;
 }
 
 //Task: 	removing

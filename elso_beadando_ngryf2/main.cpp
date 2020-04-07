@@ -116,7 +116,7 @@ void Menu::contains()
 
 void Menu::evenCount()
 {
-    p_integers -> evenCount();
+    cout << p_integers -> evenCount();
 }
 
 int Menu::readInput()
@@ -135,202 +135,65 @@ int Menu::readInput()
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-TEST_CASE("create", "inp.txt") {
-    const string fileName = "inp.txt";
+TEST_CASE("Testing isEmpty with empty set", "") {
 
-    ifstream in(fileName.c_str());
-    if(in.fail()){
-        cout << "File name error!" << endl;
-        exit(1);
-    }
-
-    Diag c(3);
-    in >> c;
-    CHECK(c(0,0)==3);
-    CHECK(c(1,1)==2);
-    CHECK(c(2,2)==1);
-
-    Diag b(2);
-    in >> b;
-    CHECK(b(0,0)==2);
-    CHECK(b(1,1)==1);
-
-    Diag a(1);
-    in >> a;
-    CHECK(a(0,0)==1);
+    Integers *p_integers = new Integers();
+    CHECK(p_integers -> isEmpty() == true);
 }
 
-TEST_CASE("getting and changing an element of the matrix", "") {
+TEST_CASE("Testing contains method with non existing number", "") {
 
-    Diag a(3);
-    a(0,0) = 0;
-    CHECK(a(0,0)==0);
+    Integers *p_integers = new Integers();
+    CHECK(p_integers -> contains(5) == false);
 }
 
-TEST_CASE("copy constructor", "inp.txt") {
-    const string fileName = "inp.txt";
+TEST_CASE("Testing add method with a new number in the set", "") {
 
-    ifstream in(fileName.c_str());
-    if(in.fail()){
-        cout << "File name error!" << endl;
-        exit(1);
-    }
+    Integers *p_integers = new Integers();
+    p_integers -> add(1);
 
-    Diag a(3);
-    in >> a;
-
-    Diag b = a;
-
-    CHECK(a(0,0)==b(0,0));
-    CHECK(a(1,1)==b(1,1));
-    CHECK(a(2,2)==b(2,2));
+    CHECK(p_integers -> contains(1) == true);
 }
 
-TEST_CASE("assignment operator", "inp.txt") {
-    const string fileName = "inp.txt";
+TEST_CASE("Testing isEmpty with non empty set", "") {
 
-    ifstream in(fileName.c_str());
-    if(in.fail()){
-        cout << "File name error!" << endl;
-        exit(1);
-    }
-
-    Diag a(3), b(3);
-    in >> a;
-
-    b = a;
-    CHECK(a(0,0)==b(0,0));
-    CHECK(a(1,1)==b(1,1));
-    CHECK(a(2,2)==b(2,2));
-
-    Diag c(3);
-    c = b = a;
-    CHECK(a(0,0)==c(0,0));
-    CHECK(a(1,1)==c(1,1));
-    CHECK(a(2,2)==c(2,2));
-
-    a = a;
-    CHECK(a(0,0)==3);
-    CHECK(a(1,1)==2);
-    CHECK(a(2,2)==1);
+    Integers *p_integers = new Integers();
+    p_integers -> add(4);
+    CHECK(p_integers -> isEmpty() == false);
 }
 
-TEST_CASE("add", "inp2.txt") {
-    const string fileName = "inp2.txt";
+TEST_CASE("Testing contains method with existing number", "") {
 
-    ifstream in(fileName.c_str());
-    if(in.fail()){
-        cout << "File name error!" << endl;
-        exit(1);
-    }
-
-    Diag a(3), b(3), c(3), d(3), f(3), e(3), z(3);
-    in >> a >> b >> z >> e;
-
-    c = a + b;
-    CHECK(c(0,0)==4);
-    CHECK(c(1,1)==5);
-    CHECK(c(2,2)==6);
-
-    d = b + a;
-    CHECK(c(0,0)==d(0,0));
-    CHECK(c(1,1)==d(1,1));
-    CHECK(c(2,2)==d(2,2));
-
-    d = (a + b) + c;
-    f = a + (b + c);
-    CHECK(d(0,0)==f(0,0));
-    CHECK(d(1,1)==f(1,1));
-    CHECK(d(2,2)==f(2,2));
-
-    c = a + z;
-    CHECK(c(0,0)==a(0,0));
-    CHECK(c(1,1)==a(1,1));
-    CHECK(c(2,2)==a(2,2));
+    Integers *p_integers = new Integers();
+    p_integers -> add(2);
+    CHECK(p_integers -> contains(2) == true);
 }
 
-TEST_CASE("multiply", "inp2.txt") {
-    const string fileName = "inp2.txt";
+TEST_CASE("Testing remove method with existing number", "") {
 
-    ifstream in(fileName.c_str());
-    if(in.fail()){
-        cout << "File name error!" << endl;
-        exit(1);
-    }
+    Integers *p_integers = new Integers();
+    p_integers -> add(3);
+    p_integers -> removes(3);
 
-    Diag a(3), b(3), c(3), d(3), f(3), e(3), z(3);
-    in >> a >> b >> z >> e;
-
-    c = a * b;
-    CHECK(c(0,0)==3);
-    CHECK(c(1,1)==6);
-    CHECK(c(2,2)==9);
-
-    d = b * a;
-    CHECK(c(0,0)==d(0,0));
-    CHECK(c(1,1)==d(1,1));
-    CHECK(c(2,2)==d(2,2));
-
-    d = (a * b) * c;
-    f = a * (b * c);
-    CHECK(d(0,0)==f(0,0));
-    CHECK(d(1,1)==f(1,1));
-    CHECK(d(2,2)==f(2,2));
-
-    c = a * e;
-    CHECK(c(0,0)==a(0,0));
-    CHECK(c(1,1)==a(1,1));
-    CHECK(c(2,2)==a(2,2));
+    CHECK(p_integers -> contains(3) == false);
 }
 
-TEST_CASE("ecxeptions", "") {
+TEST_CASE("Testing evenCount method with evens", "") {
 
-    Diag a(3);
+    Integers *p_integers = new Integers();
+    p_integers -> add(6);
+    p_integers -> add(7);
+    p_integers -> add(8);
 
-    try{
-        a(3,3) = 4;
-    } catch(Diag::Exceptions ex){
-        if(Diag::OVERINDEXED) ;
-    }
+    CHECK(p_integers -> evenCount() == 2);
+}
 
-    try{
-        a(-1,4) = 4;
-    } catch(Diag::Exceptions ex){
-        if(Diag::OVERINDEXED) ;
-    }
+TEST_CASE("Testing evenCount method without evens", "") {
 
-    Diag b(2); Diag c(3);
+    Integers *p_integers = new Integers();
+    p_integers -> add(7);
 
-    try{
-        a = b;
-    } catch(Diag::Exceptions ex){
-        if(Diag::DIFFERENT) ;
-    }
-
-    try{
-        c = a + b;
-    } catch(Diag::Exceptions ex){
-        if(Diag::DIFFERENT) ;
-    }
-
-    try{
-        c = a * b;
-    } catch(Diag::Exceptions ex){
-        if(Diag::DIFFERENT) ;
-    }
-
-
-    try{
-        a(1,0) = 4;
-    } catch(Diag::Exceptions ex){
-        if(Diag::NULLPART) ;
-    }
-
-    try{
-        int  k = a(1,0);
-    } catch(Diag::Exceptions ex){
-        if(Diag::NULLPART) ;
-    }
+    CHECK(p_integers -> evenCount() == 0);
 }
 
 #endif
