@@ -13,16 +13,18 @@ using namespace std;
 class Menu{
   public:
     Menu() { p_integers = new Integers(); }
+    ~Menu() { delete[] p_integers; }
     void run();
+
   private:
     Integers *p_integers;
 
     void menuWrite();
-    void representing();
+    void print();
     void isEmpty();
-    void adding();
-    void removing();
-    void checkExistence();
+    void add();
+    void removes();
+    void contains();
     void evenCount();
     int readInput();
 };
@@ -41,15 +43,15 @@ void Menu::run()
         menuWrite();
         cout << endl << ">>>>" ; cin >> n;
         switch(n){
-            case 1: representing();
+            case 1: print();
                     break;
             case 2: isEmpty();
                     break;
-            case 3: adding();
+            case 3: add();
                     break;
-            case 4: removing();
+            case 4: removes();
                     break;
-            case 5: checkExistence();
+            case 5: contains();
                     break;
             case 6: evenCount();
                     break;
@@ -70,30 +72,45 @@ void Menu::menuWrite()
 }
 
 
-void Menu::representing()
+void Menu::print()
 {
-    string result = p_integers -> representing();
-    cout << result;
+    p_integers -> print();
 }
 
 void Menu::isEmpty()
 {
-    p_integers -> isEmpty();
+    bool isEmpty = p_integers -> isEmpty();
+    if (isEmpty)
+    {
+        cout << "The set is empty!";
+    } else
+    {
+        cout << "The set is NOT empty!";
+    }
 }
 
-void Menu::adding()
+void Menu::add()
 {
-    p_integers -> adding();
+    int input = readInput();
+    p_integers -> add(input);
 }
 
-void Menu::removing()
+void Menu::removes()
 {
-    p_integers -> removing();
+    int input = readInput();
+    p_integers -> removes(input);
 }
 
-void Menu::checkExistence()
+void Menu::contains()
 {
-    p_integers -> checkExistence();
+    int input = readInput();
+    if (p_integers -> contains(input))
+    {
+        cout << "Contains.";
+    } else
+    {
+        cout << "Not containing.";
+    }
 }
 
 
@@ -102,7 +119,7 @@ void Menu::evenCount()
     p_integers -> evenCount();
 }
 
-int readInput()
+int Menu::readInput()
 {
     int input;
     while (!(cin >> input))

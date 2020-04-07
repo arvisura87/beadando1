@@ -5,6 +5,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -14,15 +15,15 @@ class Integers {
 public:
     enum Errors {NOT_AN_INTEGER, ALREADY_EXIST, EMPTY};
 
-    Integers(){ p_vector = NULL; evenCounter = 0; }
+    Integers(){ p_vector = new vector<int>; evenCounter = 0; }
     ~Integers() { delete[] p_vector; }
 
-    string representing();
-    void isEmpty();
-    void adding();
-    void removing();
-    void checkExistence();
-    void evenCount();
+    void print();
+    bool isEmpty();
+    void add(int number);
+    void removes(int number);
+    bool contains(int number);
+    int evenCount();
 
 private:
     vector<int>* p_vector;
